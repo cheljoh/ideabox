@@ -1,4 +1,6 @@
 class Idea < ActiveRecord::Base
+  validates :title, presence: true
+  validates :body, presence: true 
   validates :quality, inclusion: { in: %w(swill plausible genius) }
   before_save :truncate_body
 

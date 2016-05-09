@@ -31,10 +31,11 @@ function cardViews(index, idea) {
 
 function newIdea(){
   $(".ideas").prepend(
-    "<form>" +
+    "<form action='#'" +
       "Title:<br>" +
       "<input type='text' name='title'><br>" +
       "Body:<br>" +
       "<input type='text' name='body'>" +
+      "<input type='submit' value='Save' class='btn cyan accent-4'>" +
     "</form> <br>")
 }
