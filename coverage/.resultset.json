@@ -8,41 +8,49 @@
       "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/models/idea.rb": [
         1,
         1,
-        null
-      ],
-      "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/controllers/home_controller.rb": [
-        1,
-        1,
-        null,
-        null,
-        null
-      ],
-      "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/controllers/application_controller.rb": [
-        1,
-        1,
-        null
-      ],
-      "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/controllers/api/v1/ideas_controller.rb": [
-        1,
-        1,
-        1,
         1,
         null,
         1,
-        2,
-        null,
+        1,
+        1,
+        1,
         null,
         null,
         null
       ],
       "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/controllers/api/api_controller.rb": [
-        1,
-        1,
-        1,
-        null,
-        null
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/controllers/api/v1/ideas_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/controllers/application_controller.rb": [
+        0,
+        0,
+        0
+      ],
+      "/Users/chelseajohnson/Documents/turing/4module/ideabox/app/controllers/home_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0
       ]
     },
-    "timestamp": 1462829739
+    "timestamp": 1462832521
   }
 }

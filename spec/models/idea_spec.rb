@@ -17,4 +17,9 @@ RSpec.describe Idea, type: :model do
     idea1 = Idea.new(title: "hello", body: "this is pretty cool")
     expect(idea1.quality).to eq("swill")
   end
+
+  it "truncates bodies longer than 100 characters" do
+    idea = Idea.create(title: "hello", body: "this is pretty cool and I do believe that I will live forever and have a wonderful unicorn to ride everyday and her name is Sasha")
+    expect(idea.body.length).to eq(102)
+  end
 end
