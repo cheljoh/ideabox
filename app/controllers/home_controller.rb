@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
   def index
-    @ideas = Idea.all
+    @ideas = Idea.order("created_at DESC")
   end
 end
