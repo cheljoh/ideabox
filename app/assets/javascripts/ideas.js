@@ -27,7 +27,7 @@ function cardViews(idea) {
             "<p>" + idea.body + "</p>" +
           "</div>" +
           "<div class='card-action'>" +
-            "<p class=quality-" + idea.id + ">" + idea.quality + "</p>" +
+            "<p id=quality-" + idea.id + ">" + idea.quality + "</p>" +
             "<button id=upvote-" + idea.id + " class='upvote-idea btn cyan accent-4'>Upvote!</button>" +
             "<button id=downvote-" + idea.id + " class='downvote-idea btn cyan accent-4'>Downvote!</button>" +
             "<button id=" + idea.id + " class='delete-idea btn cyan accent-4'>Delete</button>" +
@@ -105,10 +105,28 @@ function removeIdea(ideaId){
   $("#idea-" + ideaId).remove()
 }
 
-function upvoteIdea(){ //have object to rotate through the options
+function upvoteIdea(){
   var id = $(this)[0].id
   var getNumbers = /\d+/
-  var cleaned_id = (id.match(getNumbers))[0]
-  var quality = $("#quality-" + cleaned_id).text()
-  debugger
+  var cleanedId = (id.match(getNumbers))[0]
+  var quality = $("#quality-" + cleanedId).text()
+  var upvote = {swill: "plausible", plausible: "genius", genius: "genius"}
+  var upvotedQuality = upvote[quality]
+  updatedData = {idea: {quality: upvotedQuality}}
+  $.ajax({
+    url: "/api/v1/ideas/"+ cleanedId,
+    method: "PUT",
+    dataType: "json",
+    data: updatedData,
+    success: function(response){
+      updateField(upvotedQuality, cleanedId)
+    },
+    error: function(){
+      console.log("Something went wrong")
+    }
+  });
+}
+
+function updateField(upvotedQuality, id){
+  $("#quality-" + id).text(upvotedQuality)
 }

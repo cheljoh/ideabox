@@ -23,7 +23,11 @@ module Api
 
       def update
         idea = Idea.update(params[:id], idea_params)
-        respond_with idea
+        if idea.save
+          respond_with idea #({ idea: idea })#, status: 201, location: api_v1_ideas_path(idea))
+        else
+          respond_with({ errors: idea.errors }, status: 422, location: api_v1_ideas_path)
+        end
       end
 
       private

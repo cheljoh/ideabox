@@ -76,6 +76,8 @@ RSpec.describe "IdeasEndpointSpec", type: :request do
 
     put "/api/v1/ideas/#{Idea.first.id}", {idea: {quality: "plausible"}}
 
+    require "pry"; binding.pry
+
     expect(Idea.first.quality).to eq("plausible")
   end
 end
