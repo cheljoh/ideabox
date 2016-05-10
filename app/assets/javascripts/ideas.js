@@ -1,6 +1,8 @@
 $(document).ready(function(){
   newIdea()
   getIdeas()
+  // $("body").on("click", "save-idea", saveIdea);
+  $("body").on("click", "button.save-idea", saveIdea);
 });
 
 function getIdeas(){
@@ -31,11 +33,30 @@ function cardViews(index, idea) {
 
 function newIdea(){
   $(".ideas").prepend(
-    "<form action='#'" +
+    "<form>" +
       "Title:<br>" +
-      "<input type='text' name='title'><br>" +
+      "<input type='text' id='title' name='title'><br>" + //#title.val
       "Body:<br>" +
-      "<input type='text' name='body'>" +
-      "<input type='submit' value='Save' class='btn cyan accent-4'>" +
+      "<input type='text' id='body' name='body'>" +
+      "<button class='save-idea btn cyan accent-4'>Save</button>" +
+      // "<input id='save-idea' type='submit' value='Save' class='save btn cyan accent-4'>" +
     "</form> <br>")
+}
+
+function saveIdea(){
+  title = $("#title").val()
+  body = $("#body").val()
+  var idea = {"idea": {"title": title, "body": body}}
+  $.ajax({
+    url: "/api/v1/ideas",
+    method: "POST",
+    dataType: "json",
+    data: idea,
+    success: function(response){
+      
+    },
+    error: function(){
+      console.log("whoops")
+    }
+  });
 }
