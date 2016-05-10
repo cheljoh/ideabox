@@ -21,14 +21,15 @@ module Api
         respond_with Idea.find(params[:id]).destroy
       end
 
+      def update
+        idea = Idea.update(params[:id], idea_params)
+        respond_with idea
+      end
+
       private
 
       def idea_params
-        params.require(:idea).permit(:body, :title)
-      end
-
-      def get_id
-
+        params.require(:idea).permit(:body, :title, :quality)
       end
     end
   end
