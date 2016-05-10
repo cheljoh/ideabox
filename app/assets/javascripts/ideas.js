@@ -152,6 +152,21 @@ function upvoteIdea(){
   });
 }
 
+// function updateIdea(id, updatedData, quality){
+//   $.ajax({
+//     url: "/api/v1/ideas/"+ id,
+//     method: "PUT",
+//     dataType: "json",
+//     data: updatedData,
+//     success: function(response){
+//       updateField(quality, id)
+//     },
+//     error: function(){
+//       console.log("Something went wrong")
+//     }
+//   });
+// }
+
 function updateField(content, id){
   $("#quality-" + id).text(content)
 }
