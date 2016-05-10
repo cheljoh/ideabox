@@ -5,6 +5,8 @@ $(document).ready(function(){
   getIdeas()
   $("body").on("click", "button.save-idea", saveIdea);
   $("body").on("click", "button.delete-idea", deleteIdea);
+  $("body").on("click", "button.upvote-idea", upvoteIdea);
+  $("body").on("click", "button.downvote-idea", downvoteIdea);
 });
 
 function getIdeas(){
@@ -26,8 +28,10 @@ function cardViews(idea) {
             "<p>" + idea.body + "</p>" +
           "</div>" +
           "<div class='card-action'>" +
-            "<p>" + idea.quality + "</p>" +
-            "<button id=" + idea.id + " class='delete-idea btn cyan accent-4'>Delete</button>"
+            "<p id=quality-" + idea.id + ">" + idea.quality + "</p>" +
+            "<button id=upvote-" + idea.id + " class='upvote-idea btn cyan accent-4'>Upvote!</button>" +
+            "<button id=downvote-" + idea.id + " class='downvote-idea btn cyan accent-4'>Downvote!</button>" +
+            "<button id=" + idea.id + " class='delete-idea btn cyan accent-4'>Delete</button>" +
           "</div>" +
         "</div>" +
       "</div>" +
@@ -45,7 +49,7 @@ function newIdea(){
     "</form> <br>")
 }
 
-function saveIdea(){
+function saveIdea(event){
   event.preventDefault()
   var idea = {"idea": {"title": $("#title").val(), "body": $("#body").val()}}
   $.ajax({
@@ -100,4 +104,69 @@ function deleteIdea(){
 
 function removeIdea(ideaId){
   $("#idea-" + ideaId).remove()
+}
+
+function downvoteIdea(upOrDown){
+  var id = getId($(this)[0].id)
+  var quality = $("#quality-" + id).text()
+  var downvote = {genius: "plausible", plausible: "swill", swill: "swill"}
+  var quality = downvote[quality]
+  updatedData = {idea: {quality: quality}}
+  $.ajax({
+    url: "/api/v1/ideas/"+ id,
+    method: "PUT",
+    dataType: "json",
+    data: updatedData,
+    success: function(response){
+      updateField(quality, id)
+    },
+    error: function(){
+      console.log("Something went wrong")
+    }
+  });
+}
+
+function getId(id){
+  var getNumbers = /\d+/
+  var cleanedId = (id.match(getNumbers))[0]
+  return cleanedId
+}
+
+function upvoteIdea(){
+  var id = getId($(this)[0].id)
+  var quality = $("#quality-" + id).text()
+  var upvote = {swill: "plausible", plausible: "genius", genius: "genius"}
+  var upvotedQuality = upvote[quality]
+  updatedData = {idea: {quality: upvotedQuality}}
+  $.ajax({
+    url: "/api/v1/ideas/"+ id,
+    method: "PUT",
+    dataType: "json",
+    data: updatedData,
+    success: function(response){
+      updateField(upvotedQuality, id)
+    },
+    error: function(){
+      console.log("Something went wrong")
+    }
+  });
+}
+
+// function updateIdea(id, updatedData, quality){
+//   $.ajax({
+//     url: "/api/v1/ideas/"+ id,
+//     method: "PUT",
+//     dataType: "json",
+//     data: updatedData,
+//     success: function(response){
+//       updateField(quality, id)
+//     },
+//     error: function(){
+//       console.log("Something went wrong")
+//     }
+//   });
+// }
+
+function updateField(content, id){
+  $("#quality-" + id).text(content)
 }

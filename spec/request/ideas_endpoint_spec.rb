@@ -68,4 +68,14 @@ RSpec.describe "IdeasEndpointSpec", type: :request do
 
     expect(Idea.count).to eq(4)
   end
+
+  it "can change quality of an idea" do
+    make_ideas
+
+    expect(Idea.first.quality).to eq("swill")
+
+    put "/api/v1/ideas/#{Idea.first.id}", {idea: {quality: "plausible"}}
+
+    expect(Idea.first.quality).to eq("plausible")
+  end
 end
