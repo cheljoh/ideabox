@@ -17,10 +17,18 @@ module Api
         end
       end
 
+      def destroy
+        respond_with Idea.find(params[:id]).destroy
+      end
+
       private
 
       def idea_params
         params.require(:idea).permit(:body, :title)
+      end
+
+      def get_id
+
       end
     end
   end

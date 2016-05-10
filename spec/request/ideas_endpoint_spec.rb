@@ -56,4 +56,16 @@ RSpec.describe "IdeasEndpointSpec", type: :request do
     expect(response.status).to eq(422)
     expect(results["errors"]["body"][0]).to eq("can't be blank")
   end
+
+  it "can delete an idea" do
+    make_ideas
+
+    idea = Idea.first
+
+    expect(Idea.count).to eq(5)
+
+    delete "/api/v1/ideas/#{idea.id}"
+
+    expect(Idea.count).to eq(4)
+  end
 end
