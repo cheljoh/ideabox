@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Idea, type: :model do
+  it { should validate_presence_of :title }
+  it { should validate_presence_of :body }
 
   it "should only include 3 settings" do
     idea1 = Idea.create(title: "hello", body: "this is pretty cool", quality: "swill")

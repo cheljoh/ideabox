@@ -22,4 +22,38 @@ RSpec.describe "IdeasEndpointSpec", type: :request do
     expect(results.first["quality"]).to eq(idea2.quality)
     expect(results.last["title"]).to eq(idea1.title)
   end
+
+  it "can create a new idea" do
+    make_ideas
+
+    expect(Idea.count).to eq(5)
+
+    post "/api/v1/ideas", {idea: {title: "hello", body: "whatsup"}}
+
+    results = JSON.parse(response.body)
+
+    expect(response.content_type).to eq("application/json")
+    expect(response).to be_success
+
+    new_idea = Idea.last
+
+    expect(Idea.count).to eq(6)
+
+    expect(new_idea.title).to eq("hello")
+    expect(new_idea.body).to eq("whatsup")
+  end
+
+  it "new idea must have a title and body" do
+    make_ideas
+
+    expect(Idea.count).to eq(5)
+
+    post "/api/v1/ideas", {idea: {title: "hello"}}
+
+    results = JSON.parse(response.body)
+
+    expect(response.content_type).to eq("application/json")
+    expect(response.status).to eq(422)
+    expect(results["errors"]["body"][0]).to eq("can't be blank")
+  end
 end
