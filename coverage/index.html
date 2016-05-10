@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-05-09T21:42:47-06:00">2016-05-09T21:42:47-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-05-09T22:13:49-06:00">2016-05-09T22:13:49-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         4.01
+         4.65
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>32</b> relevant lines. 
-    <span class="green"><b>32</b> lines covered</span> and
+    <b>35</b> relevant lines. 
+    <span class="green"><b>35</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -63,9 +63,9 @@
       <tr>
         <td class="strong"><a href="#268a961bd1140b9105f8c00aaeee3b57ac5af45b" class="src_link" title="app/controllers/api/v1/ideas_controller.rb">app/controllers/api/v1/ideas_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>27</td>
-        <td>15</td>
-        <td>15</td>
+        <td>35</td>
+        <td>18</td>
+        <td>18</td>
         <td>0</td>
         <td>1.6</td>
       </tr>
@@ -107,7 +107,7 @@
         <td>9</td>
         <td>9</td>
         <td>0</td>
-        <td>10.7</td>
+        <td>14.0</td>
       </tr>
       
     </tbody>
@@ -123,15 +123,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.41
+         1.43
        </span>
     </span> hits/line)
   </h2>
   <a name="Controllers"></a>
   <div>
     <b>4</b> files in total.
-    <b>22</b> relevant lines. 
-    <span class="green"><b>22</b> lines covered</span> and
+    <b>25</b> relevant lines. 
+    <span class="green"><b>25</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -161,9 +161,9 @@
       <tr>
         <td class="strong"><a href="#268a961bd1140b9105f8c00aaeee3b57ac5af45b" class="src_link" title="app/controllers/api/v1/ideas_controller.rb">app/controllers/api/v1/ideas_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>27</td>
-        <td>15</td>
-        <td>15</td>
+        <td>35</td>
+        <td>18</td>
+        <td>18</td>
         <td>0</td>
         <td>1.6</td>
       </tr>
@@ -200,7 +200,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         10.7
+         14.0
        </span>
     </span> hits/line)
   </h2>
@@ -232,7 +232,7 @@
         <td>9</td>
         <td>9</td>
         <td>0</td>
-        <td>10.7</td>
+        <td>14.0</td>
       </tr>
       
     </tbody>
@@ -461,8 +461,8 @@
     <h3>app/controllers/api/v1/ideas_controller.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>15</b> relevant lines. 
-      <span class="green"><b>15</b> lines covered</span> and
+      <b>18</b> relevant lines. 
+      <span class="green"><b>18</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -506,14 +506,14 @@
           <code class="ruby">      def index</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="7">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="7">
+          <span class="hits">5</span>
           
           <code class="ruby">        ideas = Idea.order(&quot;created_at DESC&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="8">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="8">
+          <span class="hits">5</span>
           
           <code class="ruby">        respond_with ideas</code>
         </li>
@@ -587,46 +587,94 @@
         <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">      private</code>
+          <code class="ruby">      def destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="21">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="22">
+        <li class="covered" data-hits="1" data-linenumber="21">
           <span class="hits">1</span>
           
-          <code class="ruby">      def idea_params</code>
+          <code class="ruby">        respond_with Idea.find(params[:id]).destroy</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="23">
-          <span class="hits">2</span>
-          
-          <code class="ruby">        params.require(:idea).permit(:body, :title)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="22">
           
           
           <code class="ruby">      end</code>
         </li>
       
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      private</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="26">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def idea_params</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="27">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        params.require(:idea).permit(:body, :title)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="29">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="30">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def get_id</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="33">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="26">
+        <li class="never" data-hits="" data-linenumber="34">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
+        <li class="never" data-hits="" data-linenumber="35">
           
           
           <code class="ruby">end</code>
@@ -806,20 +854,20 @@
           <code class="ruby">  def truncate_body(max=100, elided = &#39; ...&#39;)</code>
         </li>
       
-        <li class="covered" data-hits="30" data-linenumber="8">
-          <span class="hits">30</span>
+        <li class="covered" data-hits="40" data-linenumber="8">
+          <span class="hits">40</span>
           
           <code class="ruby">    self.body.match( /(.{1,#{max}})(?:\s|\z)/ )[1].tap do |message|</code>
         </li>
       
-        <li class="covered" data-hits="30" data-linenumber="9">
-          <span class="hits">30</span>
+        <li class="covered" data-hits="40" data-linenumber="9">
+          <span class="hits">40</span>
           
           <code class="ruby">      message &lt;&lt; elided unless message.length == self.body.length</code>
         </li>
       
-        <li class="covered" data-hits="30" data-linenumber="10">
-          <span class="hits">30</span>
+        <li class="covered" data-hits="40" data-linenumber="10">
+          <span class="hits">40</span>
           
           <code class="ruby">      self.body = message</code>
         </li>

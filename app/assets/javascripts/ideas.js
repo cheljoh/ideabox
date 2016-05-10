@@ -4,20 +4,21 @@ $(document).ready(function(){
   newIdea()
   getIdeas()
   $("body").on("click", "button.save-idea", saveIdea);
+  $("body").on("click", "button.delete-idea", deleteIdea);
 });
 
 function getIdeas(){
   $.getJSON('api/v1/ideas', function(ideas){
     $.each(ideas, function(index, idea){
       $(".ideas").append(
-        cardViews(index, idea)
+        cardViews(idea)
       )
     });
   })
 }
 
-function cardViews(index, idea) {
-  return "<div class='row' id=idea-" + index + ">" +
+function cardViews(idea) {
+  return "<div class='row' id=idea-" + idea.id + ">" +
       "<div class='col s12 m6'>" +
         "<div class='card green'>" +
           "<div class='card-content white-text'>" +
@@ -26,6 +27,7 @@ function cardViews(index, idea) {
           "</div>" +
           "<div class='card-action'>" +
             "<p>" + idea.quality + "</p>" +
+            "<button class='delete-idea btn cyan accent-4'>Delete</button>"
           "</div>" +
         "</div>" +
       "</div>" +
@@ -54,7 +56,6 @@ function saveIdea(){
     success: function(response){
       hideFlash()
       addNewIdea(response.idea)
-      incrementNewIdeaCounter()
       removeTextField()
     },
     error: function(){
@@ -77,12 +78,11 @@ function removeTextField(){
 }
 
 function addNewIdea(idea){
-  var index = "new-" + ideaCounter
   $(".ideas").prepend(
-    cardViews(index, idea)
+    cardViews(idea)
   )
 }
 
-function incrementNewIdeaCounter(){
-  ideaCounter += 1
+function deleteIdea(){
+  debugger
 }
