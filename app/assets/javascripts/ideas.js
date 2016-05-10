@@ -1,7 +1,8 @@
+var ideaCounter = 0
+
 $(document).ready(function(){
   newIdea()
   getIdeas()
-  // $("body").on("click", "save-idea", saveIdea);
   $("body").on("click", "button.save-idea", saveIdea);
 });
 
@@ -32,31 +33,56 @@ function cardViews(index, idea) {
 }
 
 function newIdea(){
-  $(".ideas").prepend(
+  $(".new-idea").html(
     "<form>" +
       "Title:<br>" +
-      "<input type='text' id='title' name='title'><br>" + //#title.val
+      "<input type='text' id='title' name='title-box'><br>" +
       "Body:<br>" +
-      "<input type='text' id='body' name='body'>" +
+      "<input type='text' id='body' name='body-box'>" +
       "<button class='save-idea btn cyan accent-4'>Save</button>" +
-      // "<input id='save-idea' type='submit' value='Save' class='save btn cyan accent-4'>" +
     "</form> <br>")
 }
 
 function saveIdea(){
-  title = $("#title").val()
-  body = $("#body").val()
-  var idea = {"idea": {"title": title, "body": body}}
+  event.preventDefault()
+  var idea = {"idea": {"title": $("#title").val(), "body": $("#body").val()}}
   $.ajax({
     url: "/api/v1/ideas",
     method: "POST",
     dataType: "json",
     data: idea,
     success: function(response){
-      
+      hideFlash()
+      addNewIdea(response.idea)
+      incrementNewIdeaCounter()
+      removeTextField()
     },
     error: function(){
-      console.log("whoops")
+      showFlash()
     }
   });
+}
+
+function showFlash(){
+  $(".flash").show()
+}
+
+function hideFlash(){
+  $(".flash").hide()
+}
+
+function removeTextField(){
+  $("#title").val("")
+  $("#body").val("")
+}
+
+function addNewIdea(idea){
+  var index = "new-" + ideaCounter
+  $(".ideas").prepend(
+    cardViews(index, idea)
+  )
+}
+
+function incrementNewIdeaCounter(){
+  ideaCounter += 1
 }
