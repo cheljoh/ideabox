@@ -6,6 +6,7 @@ $(document).ready(function(){
   $("body").on("click", "button.save-idea", saveIdea);
   $("body").on("click", "button.delete-idea", deleteIdea);
   $("body").on("click", "button.upvote-idea", upvoteIdea);
+  $("body").on("click", "button.downvote-idea", downvoteIdea);
 });
 
 function getIdeas(){
@@ -105,21 +106,19 @@ function removeIdea(ideaId){
   $("#idea-" + ideaId).remove()
 }
 
-function upvoteIdea(){
-  var id = $(this)[0].id
-  var getNumbers = /\d+/
-  var cleanedId = (id.match(getNumbers))[0]
-  var quality = $("#quality-" + cleanedId).text()
-  var upvote = {swill: "plausible", plausible: "genius", genius: "genius"}
-  var upvotedQuality = upvote[quality]
-  updatedData = {idea: {quality: upvotedQuality}}
+function downvoteIdea(upOrDown){
+  var id = getId($(this)[0].id)
+  var quality = $("#quality-" + id).text()
+  var downvote = {genius: "plausible", plausible: "swill", swill: "swill"}
+  var quality = downvote[quality]
+  updatedData = {idea: {quality: quality}}
   $.ajax({
-    url: "/api/v1/ideas/"+ cleanedId,
+    url: "/api/v1/ideas/"+ id,
     method: "PUT",
     dataType: "json",
     data: updatedData,
     success: function(response){
-      updateField(upvotedQuality, cleanedId)
+      updateField(quality, id)
     },
     error: function(){
       console.log("Something went wrong")
@@ -127,6 +126,32 @@ function upvoteIdea(){
   });
 }
 
-function updateField(upvotedQuality, id){
-  $("#quality-" + id).text(upvotedQuality)
+function getId(id){
+  var getNumbers = /\d+/
+  var cleanedId = (id.match(getNumbers))[0]
+  return cleanedId
+}
+
+function upvoteIdea(){
+  var id = getId($(this)[0].id)
+  var quality = $("#quality-" + id).text()
+  var upvote = {swill: "plausible", plausible: "genius", genius: "genius"}
+  var upvotedQuality = upvote[quality]
+  updatedData = {idea: {quality: upvotedQuality}}
+  $.ajax({
+    url: "/api/v1/ideas/"+ id,
+    method: "PUT",
+    dataType: "json",
+    data: updatedData,
+    success: function(response){
+      updateField(upvotedQuality, id)
+    },
+    error: function(){
+      console.log("Something went wrong")
+    }
+  });
+}
+
+function updateField(content, id){
+  $("#quality-" + id).text(content)
 }

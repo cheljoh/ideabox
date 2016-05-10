@@ -18,10 +18,10 @@ RSpec.feature "UserChangesQualityOfIdea", type: feature do
       expect(page).to have_content("plausible")
       click_on "Upvote!"
       expect(page).to have_content("genius")
-      # click_on "Downvote!"
-      # expect(page).to have_content("plausible")
-      # click_on "Downvote!"
-      # expect(page).to have_content("swill")
+      click_on "Downvote!"
+      expect(page).to have_content("plausible")
+      click_on "Downvote!"
+      expect(page).to have_content("swill")
     end
   end
 end
