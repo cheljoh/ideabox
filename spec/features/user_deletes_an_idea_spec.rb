@@ -5,7 +5,6 @@ RSpec.feature "UserDeletesAnIdea", type: feature do
   include WaitForAjax
 
   scenario "user deletes an idea", js: true do
-    pending
     make_ideas
 
     visit "/"
@@ -16,6 +15,9 @@ RSpec.feature "UserDeletesAnIdea", type: feature do
 
     expect(page).to have_css(".card-content", count: 5)
 
+    expect(page).to have_content(idea.title)
+    expect(page).to have_content(idea.body)
+
     within("#idea-#{idea.id}") do
       click_on "Delete"
     end
@@ -23,5 +25,8 @@ RSpec.feature "UserDeletesAnIdea", type: feature do
     wait_for_ajax
 
     expect(page).to have_css(".card-content", count: 4)
+
+    expect(page).to_not have_content(idea.title)
+    expect(page).to_not have_content(idea.body)
   end
 end
