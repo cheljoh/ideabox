@@ -27,7 +27,7 @@ function cardViews(idea) {
           "</div>" +
           "<div class='card-action'>" +
             "<p>" + idea.quality + "</p>" +
-            "<button class='delete-idea btn cyan accent-4'>Delete</button>"
+            "<button id=" + idea.id + " class='delete-idea btn cyan accent-4'>Delete</button>"
           "</div>" +
         "</div>" +
       "</div>" +
@@ -84,5 +84,20 @@ function addNewIdea(idea){
 }
 
 function deleteIdea(){
-  debugger
+  ideaId = $(this)[0].id
+  $.ajax({
+    url: "/api/v1/ideas/"+ ideaId,
+    method: "DELETE",
+    dataType: "json",
+    success: function(response){
+      removeIdea(ideaId)
+    },
+    error: function(){
+      console.log("Something went wrong")
+    }
+  });
+}
+
+function removeIdea(ideaId){
+  $("#idea-" + ideaId).remove()
 }
