@@ -5,7 +5,6 @@ RSpec.feature "UserAddsANewIdea", type: feature do
   include WaitForAjax
 
   scenario "user adds a new idea", js: true do
-    pending
     make_ideas
 
     visit "/"
@@ -19,7 +18,9 @@ RSpec.feature "UserAddsANewIdea", type: feature do
 
     wait_for_ajax
 
-    within("#idea-new-0") do
+    idea = Idea.last
+
+    within("#idea-#{idea.id}") do
       expect(page).to have_content("New Cool Idea")
       expect(page).to have_content("Everyone should wear beanies 100% of the time")
     end

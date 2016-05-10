@@ -5,7 +5,6 @@ RSpec.feature "UserChangesQualityOfIdea", type: feature do
   include WaitForAjax
 
   scenario "user adds a new idea", js: true do
-    pending
     make_ideas
 
     idea = Idea.first

@@ -5,6 +5,7 @@ $(document).ready(function(){
   getIdeas()
   $("body").on("click", "button.save-idea", saveIdea);
   $("body").on("click", "button.delete-idea", deleteIdea);
+  $("body").on("click", "button.upvote-idea", upvoteIdea);
 });
 
 function getIdeas(){
@@ -26,8 +27,10 @@ function cardViews(idea) {
             "<p>" + idea.body + "</p>" +
           "</div>" +
           "<div class='card-action'>" +
-            "<p>" + idea.quality + "</p>" +
-            "<button id=" + idea.id + " class='delete-idea btn cyan accent-4'>Delete</button>"
+            "<p class=quality-" + idea.id + ">" + idea.quality + "</p>" +
+            "<button id=upvote-" + idea.id + " class='upvote-idea btn cyan accent-4'>Upvote!</button>" +
+            "<button id=downvote-" + idea.id + " class='downvote-idea btn cyan accent-4'>Downvote!</button>" +
+            "<button id=" + idea.id + " class='delete-idea btn cyan accent-4'>Delete</button>" +
           "</div>" +
         "</div>" +
       "</div>" +
@@ -45,7 +48,7 @@ function newIdea(){
     "</form> <br>")
 }
 
-function saveIdea(){
+function saveIdea(event){
   event.preventDefault()
   var idea = {"idea": {"title": $("#title").val(), "body": $("#body").val()}}
   $.ajax({
@@ -100,4 +103,12 @@ function deleteIdea(){
 
 function removeIdea(ideaId){
   $("#idea-" + ideaId).remove()
+}
+
+function upvoteIdea(){ //have object to rotate through the options
+  var id = $(this)[0].id
+  var getNumbers = /\d+/
+  var cleaned_id = (id.match(getNumbers))[0]
+  var quality = $("#quality-" + cleaned_id).text()
+  debugger
 }
