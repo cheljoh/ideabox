@@ -1,5 +1,3 @@
-var ideaCounter = 0
-
 $(document).ready(function(){
   newIdea()
   getIdeas()
@@ -74,13 +72,8 @@ function searchField(){
     $(".idea-cards").each(function(index, idea){
       var title = $(idea).find(".card-content").find(".card-title").text();
       var body = $(idea).find(".card-content").find(".card-body").text();
-      if (title.match(filter) || body.match(filter)){
-        $(idea).show();
-      }
-      else {
-        $(idea).hide();
-      };
-    });
+      title.match(filter) || body.match(filter) ? $(idea).show() : $(idea).hide();
+    })
   })
   .keyup(function(){
     $(this).change();
