@@ -7,6 +7,7 @@ $(document).ready(function(){
   $("body").on("click", "button.delete-idea", deleteIdea);
   $("body").on("click", "button.upvote-idea", upvoteIdea);
   $("body").on("click", "button.downvote-idea", downvoteIdea);
+  $("body").on("click", "button.edit-idea", editIdea);
 });
 
 function getIdeas(){
@@ -21,7 +22,7 @@ function getIdeas(){
 
 function cardViews(idea) {
   return "<div class='row' id=idea-" + idea.id + ">" +
-      "<div class='col s12 m6'>" +
+      "<div class='col s12 m7'>" +
         "<div class='card green'>" +
           "<div class='card-content white-text'>" +
             "<span class='card-title'>" + idea.title + "</span>" +
@@ -30,8 +31,9 @@ function cardViews(idea) {
           "<div class='card-action'>" +
             "<p id=quality-" + idea.id + ">" + idea.quality + "</p>" +
             "<button id=upvote-" + idea.id + " class='upvote-idea btn cyan accent-4'>Upvote!</button>" +
-            "<button id=downvote-" + idea.id + " class='downvote-idea btn cyan accent-4'>Downvote!</button>" +
-            "<button id=" + idea.id + " class='delete-idea btn cyan accent-4'>Delete</button>" +
+            "<button id=downvote-" + idea.id + " class='downvote-idea btn amber'>Downvote!</button>" +
+            "<button id=" + idea.id + " class='delete-idea btn red'>Delete</button>" +
+            "<button id=edit-" + idea.id + " class='edit-idea btn purple'>Edit</button>" +
           "</div>" +
         "</div>" +
       "</div>" +
@@ -40,6 +42,7 @@ function cardViews(idea) {
 
 function newIdea(){
   $(".new-idea").html(
+    "<h5> Enter a New Idea</h5>" +
     "<form>" +
       "Title:<br>" +
       "<input type='text' id='title' name='title-box'><br>" +
@@ -169,4 +172,20 @@ function upvoteIdea(){
 
 function updateField(content, id){
   $("#quality-" + id).text(content)
+}
+
+function editIdea(){
+  var id = getId($(this)[0].id)
+  debugger
+  $(".new-idea").hide()
+  $("#edit-idea").append(
+    "<h5> Edit the Idea </h5>" +
+    "<form>" +
+      "Title:<br>" +
+      "<input type='text' id='edit-title' value='hey' name='title-box'><br>" +
+      "Body:<br>" +
+      "<input type='text' id='edit-body' value='hey' name='body-box'>" +
+      "<button class='save-idea btn cyan accent-4'>Enter</button>" +
+    "</form> <br>")
+    $("html, body").animate({ scrollTop: 0 }, "slow");
 }
