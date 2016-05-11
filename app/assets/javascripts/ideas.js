@@ -81,8 +81,7 @@ function searchField(){
         $(".idea-cards").each(function(index, idea){
           var title = $(idea).find(".card-content").find(".card-title").text()
           var body = $(idea).find(".card-content").find(".card-body").text()
-          if (title == filter || body == filter){ //regex
-            debugger
+          if (title.match(filter) || body.match(filter)){ //regex
             $(idea).show();
           }
           else {
@@ -91,9 +90,9 @@ function searchField(){
         })
 			}
     })
-    // .keyup(function(){
-      // $(this).change();
-    // });
+    .keyup(function(){
+      $(this).change();
+    });
 }
 
 function getIdeas(){
