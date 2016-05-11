@@ -28,12 +28,21 @@ function searchField(){
     $(input).change(function(){
       var filter = $(this).val();
       if(filter){
-        $(ideas).find("a:not(:Contains(" + filter + "))").parent().slideUp();
-			  $(ideas).find("a:Contains(" + filter + ")").parent().slideDown();
-			} else {
-			  $(ideas).find("li").slideDown();
+        $(".idea-cards").each(function(){
+          // var card = $(this).find(".card-content")
+          // $( card + ":contains("+ filter + ")" )
+          // if (".card-content:not(:Contains(" + filter + "))")){
+          //   $(this).parent().slideUp();
+          // }
+        })
+        // $(".ideas").find(".idea-cards:not(:Contains(" + filter + "))").parent().slideUp();
+        // $(".ideas").find(".card-title:not(:Contains(" + filter + "))").parent().slideUp();
+			  // $(".ideas").find(".card-title:Contains(" + filter + ")").parent().slideDown();
 			}
-			return false;
+      // else {
+			//   $(".ideas").find("li").slideDown();
+			// }
+			// return false;
     })
     .keyup(function(){
       $(this).change();
@@ -51,7 +60,7 @@ function getIdeas(){
 }
 
 function cardViews(idea) {
-  return "<div class='row' data-filter='true' data-input='.filter-input' id=idea-" + idea.id + ">" +
+  return "<div class='row idea-cards' data-filter='true' data-input='.filter-input' id=idea-" + idea.id + ">" +
       "<div class='col s12 m7'>" +
         "<div class='card green'>" +
           "<div class='card-content white-text'>" +
