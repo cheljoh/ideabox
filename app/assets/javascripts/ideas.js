@@ -63,36 +63,28 @@ function editBody(){
 }
 
 function searchField(){
-  $("#search-field").html(
-    // "<form>" +
-      "Search:<br>"
-      // "<input type='text' id='title' name='title-box'><br>" +
-      // "<button class='save-idea btn cyan accent-4'>Save</button>" +
-    // "</form> <br>"
-  )
-    var form = $("<form>").attr({"class":"filter-form","action":"#"}),
-    input = $("<input>").attr({"id":"filter", "class":"filter-input","type":"text"});
+  $("#search-field").html("Search:<br>")
+  var form = $("<form>").attr({"class":"filter-form","action":"#"}),
+  input = $("<input>").attr({"id":"filter", "class":"filter-input","type":"text"});
 
-    $(form).append(input).appendTo("#search-field");
+  $(form).append(input).appendTo("#search-field");
 
-    $(input).change(function(){
-      var filter = $(this).val();
-      if(filter){
-        $(".idea-cards").each(function(index, idea){
-          var title = $(idea).find(".card-content").find(".card-title").text()
-          var body = $(idea).find(".card-content").find(".card-body").text()
-          if (title.match(filter) || body.match(filter)){ //regex
-            $(idea).show();
-          }
-          else {
-            $(idea).hide()
-          }
-        })
-			}
-    })
-    .keyup(function(){
-      $(this).change();
+  $(input).change(function(){
+    var filter = $(this).val();
+    $(".idea-cards").each(function(index, idea){
+      var title = $(idea).find(".card-content").find(".card-title").text();
+      var body = $(idea).find(".card-content").find(".card-body").text();
+      if (title.match(filter) || body.match(filter)){
+        $(idea).show();
+      }
+      else {
+        $(idea).hide();
+      };
     });
+  })
+  .keyup(function(){
+    $(this).change();
+  });
 }
 
 function getIdeas(){
