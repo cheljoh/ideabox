@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  newIdea()
   getIdeas()
   searchField()
   $("body").on("click", "button.save-idea", saveIdea);
@@ -107,18 +106,6 @@ function cardViews(idea) {
         "</div>" +
       "</div>" +
     "</div>"
-}
-
-function newIdea(){
-  $(".new-idea").html(
-    "<h5> Enter a New Idea</h5> <br>" +
-    "<form>" +
-      "Title:<br>" +
-      "<input type='text' id='title' name='title-box'><br>" +
-      "Body:<br>" +
-      "<input type='text' id='body' name='body-box'>" +
-      "<button class='save-idea btn cyan accent-4'>Save</button>" +
-    "</form> <br>")
 }
 
 function saveIdea(event){
