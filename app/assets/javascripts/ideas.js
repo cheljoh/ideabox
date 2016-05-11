@@ -180,7 +180,6 @@ function editIdea(){
   var currentTitle = $("#title-" + id).text();
   var currentBody = $("#body-" + id).text();
   $(".new-idea").hide();
-  $(this).hide();
   debugger
   $("#edit-idea").html(
     "<h5> Edit the Idea </h5>" +
@@ -225,5 +224,4 @@ function updateIdea(id, title, body){
   $("#body-" + id).text(body)
   $(".new-idea").show()
   $("#edit-idea").empty()
-  $("#edit-" + id).show()
 }
