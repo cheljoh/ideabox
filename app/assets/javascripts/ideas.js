@@ -3,6 +3,7 @@ var ideaCounter = 0
 $(document).ready(function(){
   newIdea()
   getIdeas()
+  searchField()
   $("body").on("click", "button.save-idea", saveIdea);
   $("body").on("click", "button.delete-idea", deleteIdea);
   $("body").on("click", "button.upvote-idea", upvoteIdea);
@@ -10,6 +11,34 @@ $(document).ready(function(){
   $("body").on("click", "button.edit-idea", editIdea);
   $("body").on("click", "button.submit-edit", submitEdit);
 });
+
+function searchField(){
+  $("#search-field").html(
+    // "<form>" +
+      "Search:<br>"
+      // "<input type='text' id='title' name='title-box'><br>" +
+      // "<button class='save-idea btn cyan accent-4'>Save</button>" +
+    // "</form> <br>"
+  )
+    var form = $("<form>").attr({"class":"filter-form","action":"#"}),
+    input = $("<input>").attr({"class":"filter-input","type":"text"});
+
+    $(form).append(input).appendTo("#search-field");
+
+    $(input).change(function(){
+      var filter = $(this).val();
+      if(filter){
+        $(ideas).find("a:not(:Contains(" + filter + "))").parent().slideUp();
+			  $(ideas).find("a:Contains(" + filter + ")").parent().slideDown();
+			} else {
+			  $(ideas).find("li").slideDown();
+			}
+			return false;
+    })
+    .keyup(function(){
+      $(this).change();
+    });
+}
 
 function getIdeas(){
   $.getJSON('api/v1/ideas', function(ideas){
@@ -22,7 +51,7 @@ function getIdeas(){
 }
 
 function cardViews(idea) {
-  return "<div class='row' id=idea-" + idea.id + ">" +
+  return "<div class='row' data-filter='true' data-input='.filter-input' id=idea-" + idea.id + ">" +
       "<div class='col s12 m7'>" +
         "<div class='card green'>" +
           "<div class='card-content white-text'>" +
@@ -43,7 +72,7 @@ function cardViews(idea) {
 
 function newIdea(){
   $(".new-idea").html(
-    "<h5> Enter a New Idea</h5>" +
+    "<h5> Enter a New Idea</h5> <br>" +
     "<form>" +
       "Title:<br>" +
       "<input type='text' id='title' name='title-box'><br>" +
