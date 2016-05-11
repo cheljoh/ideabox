@@ -28,7 +28,16 @@ function searchField(){
     $(input).change(function(){
       var filter = $(this).val();
       if(filter){
-        $(".idea-cards").each(function(){
+        $(".idea-cards").each(function(index, idea){
+          var title = $(idea).find(".card-content").find(".card-title").text()
+          var body = $(idea).find(".card-content").find(".card-body").text()
+          if (title == filter || body == filter){ //regex
+            debugger
+            $(idea).show();
+          }
+          else {
+            $(idea).hide()
+          }
           // var card = $(this).find(".card-content")
           // $( card + ":contains("+ filter + ")" )
           // if (".card-content:not(:Contains(" + filter + "))")){
