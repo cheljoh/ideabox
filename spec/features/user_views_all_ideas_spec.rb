@@ -5,7 +5,6 @@ RSpec.feature "UserViewsAllIdeas", type: feature do
   include WaitForAjax
 
   scenario "user views all ideas which are sorted chronologically", js: true do
-    pending
     make_ideas
     idea1 = Idea.first
     idea2 = Idea.last

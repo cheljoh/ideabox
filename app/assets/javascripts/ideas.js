@@ -71,7 +71,7 @@ function searchField(){
     // "</form> <br>"
   )
     var form = $("<form>").attr({"class":"filter-form","action":"#"}),
-    input = $("<input>").attr({"class":"filter-input","type":"text"});
+    input = $("<input>").attr({"id":"filter", "class":"filter-input","type":"text"});
 
     $(form).append(input).appendTo("#search-field");
 
