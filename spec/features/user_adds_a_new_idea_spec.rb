@@ -24,7 +24,6 @@ RSpec.feature "UserAddsANewIdea", type: feature do
       expect(page).to have_content("New Cool Idea")
       expect(page).to have_content("Everyone should wear beanies 100% of the time")
     end
-
     expect(page).to have_css(".card-content", count: 6)
   end
 end
