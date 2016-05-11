@@ -78,4 +78,24 @@ RSpec.describe "IdeasEndpointSpec", type: :request do
 
     expect(Idea.first.quality).to eq("plausible")
   end
+
+  it "can edit an idea" do
+    make_ideas
+
+    expect(Idea.first.title).to eq("hello")
+
+    put "/api/v1/ideas/#{Idea.first.id}", {idea: {title: "this is a new title"}}
+
+    expect(Idea.first.title).to eq("this is a new title")
+  end
+
+  it "must have title" do
+    make_ideas
+
+    expect(Idea.first.title).to eq("hello")
+
+    put "/api/v1/ideas/#{Idea.first.id}", {idea: {title: ""}}
+
+    expect(Idea.first.title).to eq("hello")
+  end
 end
