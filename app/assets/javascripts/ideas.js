@@ -177,16 +177,18 @@ function updateQuality(content, id){
 
 function editIdea(){
   var id = getId($(this)[0].id)
-  var currentTitle = $("#title-" + id).text()
-  var currentBody = $("#body-" + id).text()
-  $(".new-idea").hide()
-  $("#edit-idea").append(
+  var currentTitle = $("#title-" + id).text();
+  var currentBody = $("#body-" + id).text();
+  $(".new-idea").hide();
+  $(this).hide();
+  debugger
+  $("#edit-idea").html(
     "<h5> Edit the Idea </h5>" +
     "<form>" +
       "Title:<br>" +
-      "<input type='text' id='edit-title' value=" + currentTitle + " name='edit-title'><br>" +
+      "<input type='text' id='edit-title' value='" + currentTitle + "' name='edit-title'><br>" +
       "Body:<br>" +
-      "<input type='text' id='edit-body' value=" + currentBody + " name='edit-body'>" +
+      "<input type='text' id='edit-body' value='" + currentBody + "' name='edit-body'>" +
       "<button id=enter-" + id + " class='submit-edit btn cyan accent-4'>Enter</button>" +
     "</form> <br>")
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -197,24 +199,31 @@ function submitEdit(event){
   var id = getId($(this)[0].id)
   updatedTitle = $("#edit-title").val()
   updatedBody = $("#edit-body").val()
-  var idea = {idea: {title: updatedTitle, body: updatedBody}}
-  $.ajax({
-    url: "/api/v1/ideas/"+ id,
-    method: "PUT",
-    dataType: "json",
-    data: idea,
-    success: function(response){
-      updateIdea(id, updatedTitle, updatedBody)
-    },
-    error: function(){
-      showFlash()
-    }
-  });
+  if (updatedTitle == "" || updatedBody == ""){
+    showFlash()
+  }
+  else {
+    hideFlash()
+    var idea = {idea: {title: updatedTitle, body: updatedBody}}
+    $.ajax({
+      url: "/api/v1/ideas/"+ id,
+      method: "PUT",
+      dataType: "json",
+      data: idea,
+      success: function(response){
+        updateIdea(id, updatedTitle, updatedBody)
+      },
+      error: function(){
+        console.log("Something went wrong")
+      }
+    });
+  }
 }
 
 function updateIdea(id, title, body){
   $("#title-" + id).text(title)
   $("#body-" + id).text(body)
   $(".new-idea").show()
-  $("#edit-idea").hide()
+  $("#edit-idea").empty()
+  $("#edit-" + id).show()
 }
