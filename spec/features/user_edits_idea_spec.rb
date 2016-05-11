@@ -35,6 +35,7 @@ RSpec.feature "UserEditsIdea", type: :feature do
   end
 
   scenario "edited body gets truncated", js: true do
+    pending
     idea = Idea.create(title: "A", body: "B")
 
     visit "/"
