@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-05-10T20:09:38-06:00">2016-05-10T20:09:38-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-05-11T14:37:30-06:00">2016-05-11T14:37:30-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.98
+         9.36
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>39</b> relevant lines. 
-    <span class="green"><b>39</b> lines covered</span> and
+    <b>38</b> relevant lines. 
+    <span class="green"><b>38</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -67,7 +67,7 @@
         <td>22</td>
         <td>22</td>
         <td>0</td>
-        <td>3.4</td>
+        <td>3.7</td>
       </tr>
       
       <tr>
@@ -83,9 +83,9 @@
       <tr>
         <td class="strong"><a href="#d3dc1a811c1ab0169a8ffc67985fcbb06c354246" class="src_link" title="app/controllers/home_controller.rb">app/controllers/home_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>5</td>
         <td>2</td>
-        <td>2</td>
+        <td>1</td>
+        <td>1</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -123,15 +123,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.82
+         3.12
        </span>
     </span> hits/line)
   </h2>
   <a name="Controllers"></a>
   <div>
     <b>4</b> files in total.
-    <b>29</b> relevant lines. 
-    <span class="green"><b>29</b> lines covered</span> and
+    <b>28</b> relevant lines. 
+    <span class="green"><b>28</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -165,7 +165,7 @@
         <td>22</td>
         <td>22</td>
         <td>0</td>
-        <td>3.4</td>
+        <td>3.7</td>
       </tr>
       
       <tr>
@@ -181,9 +181,9 @@
       <tr>
         <td class="strong"><a href="#d3dc1a811c1ab0169a8ffc67985fcbb06c354246" class="src_link" title="app/controllers/home_controller.rb">app/controllers/home_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>5</td>
         <td>2</td>
-        <td>2</td>
+        <td>1</td>
+        <td>1</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -614,20 +614,20 @@
           <code class="ruby">      def update</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="25">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="11" data-linenumber="25">
+          <span class="hits">11</span>
           
           <code class="ruby">        idea = Idea.update(params[:id], idea_params)</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="26">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="11" data-linenumber="26">
+          <span class="hits">11</span>
           
           <code class="ruby">        if idea.save</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="27">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="10" data-linenumber="27">
+          <span class="hits">10</span>
           
           <code class="ruby">          respond_with({ idea: idea }, status: 200, location: api_v1_ideas_path(idea))</code>
         </li>
@@ -680,8 +680,8 @@
           <code class="ruby">      def idea_params</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="36">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="36">
+          <span class="hits">14</span>
           
           <code class="ruby">        params.require(:idea).permit(:body, :title, :quality)</code>
         </li>
@@ -755,8 +755,8 @@
     <h3>app/controllers/home_controller.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>2</b> relevant lines. 
-      <span class="green"><b>2</b> lines covered</span> and
+      <b>1</b> relevant lines. 
+      <span class="green"><b>1</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -770,25 +770,7 @@
           <code class="ruby">class HomeController &lt; ApplicationController</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="2">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def index</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="3">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="4">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="5">
+        <li class="never" data-hits="" data-linenumber="2">
           
           
           <code class="ruby">end</code>
