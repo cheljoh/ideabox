@@ -8,9 +8,59 @@ $(document).ready(function(){
   $("body").on("click", "button.delete-idea", deleteIdea);
   $("body").on("click", "button.upvote-idea", upvoteIdea);
   $("body").on("click", "button.downvote-idea", downvoteIdea);
-  $("body").on("click", "button.edit-idea", editIdea);
-  $("body").on("click", "button.submit-edit", submitEdit);
+  $("body").on("blur", ".card-title", editTitle);
+  $("body").on("blur", ".card-body", editBody);
 });
+
+function editTitle(){
+  var id = getId($(this)[0].id)
+  var contents = $(this).text()
+  if (contents == ""){
+    showFlash()
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+  else {
+    hideFlash()
+    var idea = {idea: {title: contents}}
+    $.ajax({
+      url: "/api/v1/ideas/"+ id,
+      method: "PUT",
+      dataType: "json",
+      data: idea,
+      success: function(response){
+        console.log("success")
+      },
+      error: function(){
+        console.log("Something went wrong")
+      }
+    });
+  }
+}
+
+function editBody(){
+  var id = getId($(this)[0].id)
+  var contents = $(this).text()
+  if (contents == ""){
+    showFlash()
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+  else {
+    hideFlash()
+    var idea = {idea: {body: contents}}
+    $.ajax({
+      url: "/api/v1/ideas/"+ id,
+      method: "PUT",
+      dataType: "json",
+      data: idea,
+      success: function(response){
+        console.log("success")
+      },
+      error: function(){
+        console.log("Something went wrong")
+      }
+    });
+  }
+}
 
 function searchField(){
   $("#search-field").html(
@@ -38,24 +88,12 @@ function searchField(){
           else {
             $(idea).hide()
           }
-          // var card = $(this).find(".card-content")
-          // $( card + ":contains("+ filter + ")" )
-          // if (".card-content:not(:Contains(" + filter + "))")){
-          //   $(this).parent().slideUp();
-          // }
         })
-        // $(".ideas").find(".idea-cards:not(:Contains(" + filter + "))").parent().slideUp();
-        // $(".ideas").find(".card-title:not(:Contains(" + filter + "))").parent().slideUp();
-			  // $(".ideas").find(".card-title:Contains(" + filter + ")").parent().slideDown();
 			}
-      // else {
-			//   $(".ideas").find("li").slideDown();
-			// }
-			// return false;
     })
-    .keyup(function(){
-      $(this).change();
-    });
+    // .keyup(function(){
+      // $(this).change();
+    // });
 }
 
 function getIdeas(){
@@ -70,18 +108,17 @@ function getIdeas(){
 
 function cardViews(idea) {
   return "<div class='row idea-cards' data-filter='true' data-input='.filter-input' id=idea-" + idea.id + ">" +
-      "<div class='col s12 m7'>" +
+      "<div class='col s12 m6'>" +
         "<div class='card green'>" +
           "<div class='card-content white-text'>" +
-            "<span id=title-" + idea.id + " class='card-title'>" + idea.title + "</span>" +
-            "<p id=body-" + idea.id + ">" + idea.body + "</p>" +
+            "<input><span contentEditable='true' id=title-" + idea.id + " class='card-title'>" + idea.title + "</span></input>" +
+            "<p class='card-body' contentEditable='true' id=body-" + idea.id + ">" + idea.body + "</p>" +
           "</div>" +
           "<div class='card-action'>" +
             "<p id=quality-" + idea.id + ">" + idea.quality + "</p>" +
             "<button id=upvote-" + idea.id + " class='upvote-idea btn cyan accent-4'>Upvote!</button>" +
             "<button id=downvote-" + idea.id + " class='downvote-idea btn amber'>Downvote!</button>" +
             "<button id=" + idea.id + " class='delete-idea btn red'>Delete</button>" +
-            "<button id=edit-" + idea.id + " class='edit-idea btn purple'>Edit</button>" +
           "</div>" +
         "</div>" +
       "</div>" +
@@ -220,55 +257,4 @@ function upvoteIdea(){
 
 function updateQuality(content, id){
   $("#quality-" + id).text(content)
-}
-
-function editIdea(){
-  var id = getId($(this)[0].id)
-  var currentTitle = $("#title-" + id).text();
-  var currentBody = $("#body-" + id).text();
-  $(".new-idea").hide();
-  debugger
-  $("#edit-idea").html(
-    "<h5> Edit the Idea </h5>" +
-    "<form>" +
-      "Title:<br>" +
-      "<input type='text' id='edit-title' value='" + currentTitle + "' name='edit-title'><br>" +
-      "Body:<br>" +
-      "<input type='text' id='edit-body' value='" + currentBody + "' name='edit-body'>" +
-      "<button id=enter-" + id + " class='submit-edit btn cyan accent-4'>Enter</button>" +
-    "</form> <br>")
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-}
-
-function submitEdit(event){
-  event.preventDefault()
-  var id = getId($(this)[0].id)
-  updatedTitle = $("#edit-title").val()
-  updatedBody = $("#edit-body").val()
-  if (updatedTitle == "" || updatedBody == ""){
-    showFlash()
-  }
-  else {
-    hideFlash()
-    var idea = {idea: {title: updatedTitle, body: updatedBody}}
-    $.ajax({
-      url: "/api/v1/ideas/"+ id,
-      method: "PUT",
-      dataType: "json",
-      data: idea,
-      success: function(response){
-        updateIdea(id, updatedTitle, updatedBody)
-      },
-      error: function(){
-        console.log("Something went wrong")
-      }
-    });
-  }
-}
-
-function updateIdea(id, title, body){
-  $("#title-" + id).text(title)
-  $("#body-" + id).text(body)
-  $(".new-idea").show()
-  $("#edit-idea").empty()
 }

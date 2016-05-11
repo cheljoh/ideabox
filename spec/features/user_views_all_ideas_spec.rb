@@ -1,4 +1,3 @@
-ls
 require "rails_helper"
 
 RSpec.feature "UserViewsAllIdeas", type: feature do
