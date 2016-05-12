@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  getIdeas()
-  searchField()
+  getIdeas();
+  searchField();
   $("body").on("click", "button.save-idea", saveIdea);
   $("body").on("click", "button.delete-idea", deleteIdea);
   $("body").on("click", "button.upvote-idea", downvoteOrUpvote);
@@ -29,7 +29,7 @@ function saveIdea(event){
 }
 
 function deleteIdea(){
-  ideaId = $(this).attr("id")
+  ideaId = $(this).attr("id");
   $.ajax({
     url: "/api/v1/ideas/"+ ideaId,
     method: "DELETE",
@@ -50,10 +50,10 @@ function updateIdea(idea, id, quality){
     dataType: "json",
     data: idea,
     success: function(){
-      if (typeof quality !== "undefined"){ updateQuality(quality, id) }
+      if (typeof quality !== "undefined"){ updateQuality(quality, id); }
     },
     error: function(){
-      console.log("Something went wrong")
+      console.log("Something went wrong");
     }
   });
 }
@@ -63,7 +63,7 @@ function editIdea(){
   var partToReplace = $(this).attr("class");
   var contents = $(this).text();
   var ideaAttribute = setAttribute(partToReplace, contents);
-  checkForContents(contents, ideaAttribute, id)
+  checkForContents(contents, ideaAttribute, id);
 }
 
 function setAttribute(partToReplace, contents){

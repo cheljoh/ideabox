@@ -12,6 +12,9 @@ RSpec.feature "UserSearchesIdeas", type: :feature do
 
     visit "/"
 
+    expect(page).to have_content(idea2.title)
+    expect(page).to have_content(idea2.body)
+
     wait_for_ajax
 
     fill_in "filter", with: "hello"
@@ -21,5 +24,11 @@ RSpec.feature "UserSearchesIdeas", type: :feature do
 
     expect(page).to_not have_content(idea2.title)
     expect(page).to_not have_content(idea2.body)
+
+    fill_in "filter", with: ""
+
+    expect(page).to have_content(idea2.title)
+
+    expect(page).to have_content(idea1.title)
   end
 end

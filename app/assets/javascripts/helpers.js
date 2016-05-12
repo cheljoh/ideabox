@@ -15,7 +15,7 @@ function removeIdea(ideaId){
 function addNewIdea(idea){
   $(".ideas").prepend(
     cardViews(idea)
-  )
+  );
 }
 
 function showFlash(){
