@@ -5,57 +5,27 @@ $(document).ready(function(){
   $("body").on("click", "button.delete-idea", deleteIdea);
   $("body").on("click", "button.upvote-idea", upvoteIdea);
   $("body").on("click", "button.downvote-idea", downvoteIdea);
-  $("body").on("blur", ".card-title", editTitle);
-  $("body").on("blur", ".card-body", editBody);
+  $("body").on("blur", ".card-title", editIdea);
+  $("body").on("blur", ".card-body", editIdea);
 });
 
-function editTitle(){
-  var id = getId($(this)[0].id)
+function editIdea(){
+  var id = getId($(this).attr("id"))
+  var partToReplace = $(this).attr("class")
   var contents = $(this).text()
+  if (partToReplace == "card-title") {
+    var ideaAttribute = {title: contents}
+  } else if (partToReplace == "card-body"){
+    var ideaAttribute = {body: contents}
+  }
   if (contents == ""){
     showFlash()
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
   else {
+    var idea = {idea: ideaAttribute }
     hideFlash()
-    var idea = {idea: {title: contents}}
-    $.ajax({
-      url: "/api/v1/ideas/"+ id,
-      method: "PUT",
-      dataType: "json",
-      data: idea,
-      success: function(response){
-        console.log("success")
-      },
-      error: function(){
-        console.log("Something went wrong")
-      }
-    });
-  }
-}
-
-function editBody(){
-  var id = getId($(this)[0].id)
-  var contents = $(this).text()
-  if (contents == ""){
-    showFlash()
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-  }
-  else {
-    hideFlash()
-    var idea = {idea: {body: contents}}
-    $.ajax({
-      url: "/api/v1/ideas/"+ id,
-      method: "PUT",
-      dataType: "json",
-      data: idea,
-      success: function(response){
-        console.log("success")
-      },
-      error: function(){
-        console.log("Something went wrong")
-      }
-    });
+    updateIdea(idea, id)
   }
 }
 
@@ -63,9 +33,7 @@ function searchField(){
   $("#search-field").html("Search:<br>")
   var form = $("<form>").attr({"class":"filter-form","action":"#"}),
   input = $("<input>").attr({"id":"filter", "class":"filter-input","type":"text"});
-
   $(form).append(input).appendTo("#search-field");
-
   $(input).change(function(){
     var filter = $(this).val();
     $(".idea-cards").each(function(index, idea){
@@ -165,17 +133,32 @@ function removeIdea(ideaId){
   $("#idea-" + ideaId).remove()
 }
 
-function downvoteIdea(upOrDown){
-  var id = getId($(this)[0].id)
-  var quality = $("#quality-" + id).text()
-  var downvote = {genius: "plausible", plausible: "swill", swill: "swill"}
-  var quality = downvote[quality]
-  updatedData = {idea: {quality: quality}}
+// function downvoteIdea(upOrDown){
+//   var id = getId($(this)[0].id)
+//   var quality = $("#quality-" + id).text()
+//   var downvote = {genius: "plausible", plausible: "swill", swill: "swill"}
+//   var quality = downvote[quality]
+//   updatedData = {idea: {quality: quality}}
+//   $.ajax({
+//     url: "/api/v1/ideas/"+ id,
+//     method: "PUT",
+//     dataType: "json",
+//     data: updatedData,
+//     success: function(response){
+//       updateQuality(quality, id)
+//     },
+//     error: function(){
+//       console.log("Something went wrong")
+//     }
+//   });
+// }
+
+function updateIdea(idea, id, quality){
   $.ajax({
     url: "/api/v1/ideas/"+ id,
     method: "PUT",
     dataType: "json",
-    data: updatedData,
+    data: idea,
     success: function(response){
       updateQuality(quality, id)
     },
@@ -191,25 +174,42 @@ function getId(id){
   return cleanedId
 }
 
+function downvoteIdea(upOrDown){
+  var id = getId($(this)[0].id)
+  var quality = $("#quality-" + id).text()
+  var downvote = {genius: "plausible", plausible: "swill", swill: "swill"}
+  var updatedQuality = downvote[quality]
+  updatedData = {idea: {quality: updatedQuality}}
+  updateIdea(updatedData, id, updatedQuality)
+}
+
 function upvoteIdea(){
   var id = getId($(this)[0].id)
   var quality = $("#quality-" + id).text()
   var upvote = {swill: "plausible", plausible: "genius", genius: "genius"}
-  var upvotedQuality = upvote[quality]
-  updatedData = {idea: {quality: upvotedQuality}}
-  $.ajax({
-    url: "/api/v1/ideas/"+ id,
-    method: "PUT",
-    dataType: "json",
-    data: updatedData,
-    success: function(response){
-      updateQuality(upvotedQuality, id)
-    },
-    error: function(){
-      console.log("Something went wrong")
-    }
-  });
+  var updatedQuality = upvote[quality]
+  updatedData = {idea: {quality: updatedQuality}}
+  updateIdea(updatedData, id, updatedQuality)
 }
+// function upvoteIdea(){
+//   var id = getId($(this)[0].id)
+//   var quality = $("#quality-" + id).text()
+//   var upvote = {swill: "plausible", plausible: "genius", genius: "genius"}
+//   var upvotedQuality = upvote[quality]
+//   updatedData = {idea: {quality: upvotedQuality}}
+//   $.ajax({
+//     url: "/api/v1/ideas/"+ id,
+//     method: "PUT",
+//     dataType: "json",
+//     data: updatedData,
+//     success: function(response){
+//       updateQuality(upvotedQuality, id)
+//     },
+//     error: function(){
+//       console.log("Something went wrong")
+//     }
+//   });
+// }
 
 // function updateIdea(id, updatedData, quality){
 //   $.ajax({
