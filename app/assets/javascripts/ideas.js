@@ -32,11 +32,7 @@ function editIdea(){
 }
 
 function searchField(){
-  $("#search-field").html("Search:<br>")
-  var form = $("<form>").attr({"class":"filter-form","action":"#"}),
-  input = $("<input>").attr({"id":"filter", "class":"filter-input","type":"text"});
-  $(form).append(input).appendTo("#search-field");
-  $(input).change(function(){
+  $("#filter").change(function(){
     var filter = $(this).val();
     $(".idea-cards").each(function(index, idea){
       var title = $(idea).find(".card-content").find(".card-title").text();
