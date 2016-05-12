@@ -3,9 +3,9 @@ function getIdeas(){
     $.each(ideas, function(index, idea){
       $(".ideas").append(
         cardViews(idea)
-      )
+      );
     });
-  })
+  });
 }
 
 function cardViews(idea) {
@@ -24,5 +24,5 @@ function cardViews(idea) {
           "</div>" +
         "</div>" +
       "</div>" +
-    "</div>"
+    "</div>";
 }
