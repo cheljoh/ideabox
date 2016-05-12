@@ -13,7 +13,7 @@ function cardViews(idea) {
       "<div class='col s12 m6'>" +
         "<div class='card green'>" +
           "<div class='card-content white-text'>" +
-            "<input><span contentEditable='true' id=title-" + idea.id + " class='card-title'>" + idea.title + "</span></input>" +
+            "<span contentEditable='true' id=title-" + idea.id + " class='card-title'>" + idea.title + "</span> <br>" +
             "<p class='card-body' contentEditable='true' id=body-" + idea.id + ">" + idea.body + "</p>" +
           "</div>" +
           "<div class='card-action'>" +
