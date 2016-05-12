@@ -17,7 +17,7 @@ function cardViews(idea) {
             "<p class='card-body' contentEditable='true' id=body-" + idea.id + ">" + idea.body + "</p>" +
           "</div>" +
           "<div class='card-action'>" +
-            "<p id=quality-" + idea.id + ">" + idea.quality + "</p>" +
+            "<p class='cyan-text text-lighten-4' id=quality-" + idea.id + ">" + idea.quality + "</p>" +
             "<button id=upvote-" + idea.id + " class='upvote-idea btn cyan accent-4'>Upvote!</button>" +
             "<button id=downvote-" + idea.id + " class='downvote-idea btn amber'>Downvote!</button>" +
             "<button id=" + idea.id + " class='delete-idea btn purple lighten-2'>Delete</button>" +
