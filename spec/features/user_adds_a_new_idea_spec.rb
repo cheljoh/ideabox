@@ -24,7 +24,27 @@ RSpec.feature "UserAddsANewIdea", type: feature do
       expect(page).to have_content("New Cool Idea")
       expect(page).to have_content("Everyone should wear beanies 100% of the time")
     end
-    
+
     expect(page).to have_css(".card-content", count: 6)
+  end
+
+  scenario "user must complete all fields", js: true do
+    make_ideas
+
+    visit "/"
+
+    wait_for_ajax
+
+    fill_in "body-box", with: "Everyone should wear beanies 100% of the time"
+
+    click_on "Save"
+
+    expect(page).to have_content("Please complete all fields!")
+
+    fill_in "title-box", with: "New Cool Idea"
+
+    click_on "Save"
+
+    expect(page).to_not have_content("Please complete all fields!")
   end
 end
