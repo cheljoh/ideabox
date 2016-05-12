@@ -1,4 +1,4 @@
-//= require ideas
+//= require events
 
 describe('getNewQuality', function () {
   it('promotes a quality', function () {
@@ -25,14 +25,3 @@ describe('getNewQuality', function () {
     assert.equal(getNewQuality(partToReplace, quality), "swill");
   });
 });
-
-// function getNewQuality(partToReplace, quality){
-//   if (partToReplace == "upvote") {
-//     var upvote = {swill: "plausible", plausible: "genius", genius: "genius"}
-//     var updatedQuality = upvote[quality]
-//   } else if (partToReplace == "downvote"){
-//     var downvote = {genius: "plausible", plausible: "swill", swill: "swill"}
-//     var updatedQuality = downvote[quality]
-//   }
-//   return updatedQuality
-// }

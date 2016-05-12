@@ -1,4 +1,4 @@
-//= require ideas
+//= require helpers
 
 describe('getId', function () {
   it('cleans ids', function () {
