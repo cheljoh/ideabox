@@ -24,5 +24,5 @@ function cardViews(idea) {
           "</div>" +
         "</div>" +
       "</div>" +
-    "</div>";
+    "</div>"
 }

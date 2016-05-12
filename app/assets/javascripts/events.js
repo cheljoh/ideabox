@@ -29,7 +29,7 @@ function saveIdea(event){
 }
 
 function deleteIdea(){
-  ideaId = $(this).attr("id"); 
+  ideaId = $(this).attr("id");
   $.ajax({
     url: "/api/v1/ideas/"+ ideaId,
     method: "DELETE",
