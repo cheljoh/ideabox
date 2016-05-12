@@ -48,7 +48,11 @@ RSpec.feature "UserEditsIdea", type: :feature do
 
     click_on "Upvote!"
 
+    wait_for_ajax
+
     visit '/'
+
+    wait_for_ajax
 
     expect(page).to have_content("Bthis is pretty cool and I do believe that I will live forever and have a wonderful unicorn to ride ...")
   end
